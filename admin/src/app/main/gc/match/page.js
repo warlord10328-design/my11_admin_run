@@ -18,8 +18,6 @@ useEffect(() => {
 
 
   const [url, setUrl] = useState("");
-  const [teamA, setTeamA] = useState(initialTeamA);
-  const [teamB, setTeamB] = useState(initialTeamB);
   const [teamAPlayers, setTeamAPlayers] = useState([]);
   const [teamBPlayers, setTeamBPlayers] = useState([]);
   const [missingA, setMissingA] = useState([]);
@@ -134,6 +132,7 @@ useEffect(() => {
     </div>
   );
 }
+
 
 
 
