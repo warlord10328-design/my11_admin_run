@@ -7,15 +7,17 @@ import { useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 
 export default function MatchSetup() {
-const searchParams = useSearchParams();
-const [teamA, setTeamA] = useState("");
-const [teamB, setTeamB] = useState("");
+  const searchParams = useSearchParams();
+  const [teamA, setTeamA] = useState("");
+  const [teamB, setTeamB] = useState("");
 
-useEffect(() => {
-  setTeamA(searchParams.get("team1") || "");
-  setTeamB(searchParams.get("team2") || "");
-}, [searchParams]);
-
+  // Wrap useSearchParams usage inside useEffect
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setTeamA(searchParams.get("team1") || "");
+      setTeamB(searchParams.get("team2") || "");
+    }
+  }, [searchParams]);
 
   const [url, setUrl] = useState("");
   const [teamAPlayers, setTeamAPlayers] = useState([]);
@@ -43,7 +45,6 @@ useEffect(() => {
       setTeamAPlayers(s.playersA || []);
       setTeamBPlayers(s.playersB || []);
 
-      // check in DB
       await checkPlayersInDB(s.playersA || [], s.playersB || []);
     } catch (err) {
       console.error(err);
@@ -76,7 +77,6 @@ useEffect(() => {
     }
   }
 
-  // helper lowercased sets for fast lookup
   const missingALower = new Set((missingA || []).map((m) => (m || "").toLowerCase()));
   const missingBLower = new Set((missingB || []).map((m) => (m || "").toLowerCase()));
 
@@ -95,7 +95,6 @@ useEffect(() => {
       <div className={styles.filter}>Bowler , Batsman , Allrounder</div>
 
       <div className={styles.flex}>
-
         {/* TEAM A */}
         <div className={styles.teamA}>
           <div className={styles.naam}>{teamA || "Team A"}</div>
@@ -127,13 +126,7 @@ useEffect(() => {
             })}
           </div>
         </div>
-
       </div>
     </div>
   );
 }
-
-
-
-
-
