@@ -1,0 +1,161 @@
+/* page.module.css */
+
+/* Page container */
+.boot {
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 28px;
+  box-sizing: border-box;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+  color: #0f172a; /* slate-900 */
+}
+
+/* Page title */
+.boot h1 {
+  margin: 0 0 20px 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #0b1220;
+}
+
+/* Grid layout for sections; 1 column on small, 2 on medium, 4 on large */
+.section-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+@media (min-width: 760px) {
+  .section-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .section-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Each section card */
+.section {
+  background: #1e002c;
+  border: 1px solid rgba(15, 23, 42, 0.06); /* subtle border */
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(11, 18, 32, 0.04);
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Section header */
+.section h2 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0400ff;
+}
+
+/* Inputs stack */
+.section input[type="text"],
+.section input[type="number"],
+.section input[type="date"],
+.section input[type="url"],
+.section input[type="email"],
+.section select,
+.section textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  margin: 6px 0 10px 0;
+  border-radius: 8px;
+  border: 0.1vw solid #ffffff;
+  background: #fcfdff00;
+  font-size: 14px;
+  outline: none;
+  transition: box-shadow 120ms ease, border-color 120ms ease;
+}
+
+/* Input focus */
+.section input:focus,
+.section select:focus,
+.section textarea:focus {
+  border-color: rgba(59, 130, 246, 0.9); /* blue-500 */
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.08);
+}
+
+/* Small helper text (optional) */
+.small {
+  font-size: 12px;
+  color: #6b7280; /* gray-500 */
+  margin-top: -6px;
+  margin-bottom: 8px;
+}
+
+/* Buttons */
+.section button {
+  margin-top: auto; /* push to bottom */
+  align-self: stretch;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%); /* blue -> purple */
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.12);
+}
+
+/* Button hover + active */
+.section button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.14);
+}
+.section button:active {
+  transform: translateY(0);
+  opacity: 0.96;
+}
+
+/* Compact inputs for small inline fields (like ids) */
+.inline-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.inline-row input {
+  flex: 1;
+}
+
+/* Success / error messages (simple) */
+.msg {
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+.msg.success {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid rgba(6, 95, 70, 0.08);
+}
+.msg.error {
+  background: #fff1f2;
+  color: #991b1b;
+  border: 1px solid rgba(153, 27, 27, 0.08);
+}
+
+/* small responsive tweaks */
+@media (max-width: 520px) {
+  .boot {
+    padding: 18px;
+  }
+  .section {
+    padding: 14px;
+  }
+}

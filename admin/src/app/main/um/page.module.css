@@ -1,0 +1,84 @@
+.container {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.searchBox {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.button {
+  padding: 12px 20px;
+  background: #0a4bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #00000000;
+}
+
+.table th {
+  text-align: left;
+  padding: 12px;
+  background: #ffffff00;
+  font-size: 15px;
+}
+
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.active {
+  color: green;
+  font-weight: bold;
+}
+
+.banned {
+  color: red;
+  font-weight: bold;
+}
+
+.actionBtn {
+  background: #0a4bff;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  border: none;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.viewBtn {
+  background: #444;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  border: none;
+  margin: 3px 0;
+  display: block;
+  cursor: pointer;
+}

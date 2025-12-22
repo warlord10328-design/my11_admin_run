@@ -1,0 +1,33 @@
+.boot{
+    text-align: center;
+    width: 50vw;
+    border: 0.1vw solid #ffffff50;
+    border-radius: 1vw;
+    height: 10vw;
+    margin: 3vw auto;
+    padding-top: 2.5vw;
+    color:#fff;
+    box-shadow: 0vw 1vw 2vw #000;
+}
+.boot:active{
+    box-shadow: 0vw 0vw 0vw #000;
+    transform: translateY(1vw);
+    color: #ffff00;
+    border-color: #ffff00;
+}
+.adom{
+    width:40vw;
+    text-align: center;
+    border-radius: 1vw;
+    border:0.1vw solid #ff0000;
+    padding: 0.5vw;
+    box-shadow: 0 0 2vw #ff000070;
+    position: absolute;
+    top:60vw;
+    left:30vw;
+    background-color: #ff000070;
+    pointer-events: none;
+}
+.adom2{
+    display: none;
+}
