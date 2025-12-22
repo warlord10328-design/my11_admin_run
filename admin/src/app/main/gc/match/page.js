@@ -7,9 +7,15 @@ import { useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 
 export default function MatchSetup() {
-  const searchParams = useSearchParams();
-  const initialTeamA = searchParams.get("team1") || "";
-  const initialTeamB = searchParams.get("team2") || "";
+const searchParams = useSearchParams();
+const [teamA, setTeamA] = useState("");
+const [teamB, setTeamB] = useState("");
+
+useEffect(() => {
+  setTeamA(searchParams.get("team1") || "");
+  setTeamB(searchParams.get("team2") || "");
+}, [searchParams]);
+
 
   const [url, setUrl] = useState("");
   const [teamA, setTeamA] = useState(initialTeamA);
@@ -128,6 +134,7 @@ export default function MatchSetup() {
     </div>
   );
 }
+
 
 
 
