@@ -7,17 +7,20 @@ import { useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 
 export default function MatchSetup() {
-  const searchParams = useSearchParams();
   const [teamA, setTeamA] = useState("");
   const [teamB, setTeamB] = useState("");
+  const [searchReady, setSearchReady] = useState(false);
+  const searchParams = useSearchParams(); // keep at top level
 
-  // Wrap useSearchParams usage inside useEffect
+  // Client-side only
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setTeamA(searchParams.get("team1") || "");
-      setTeamB(searchParams.get("team2") || "");
-    }
+    setTeamA(searchParams.get("team1") || "");
+    setTeamB(searchParams.get("team2") || "");
+    setSearchReady(true); // mark that params are ready
   }, [searchParams]);
+
+  // Prevent rendering until client-side params are ready
+  if (!searchReady) return null;
 
   const [url, setUrl] = useState("");
   const [teamAPlayers, setTeamAPlayers] = useState([]);
@@ -41,10 +44,8 @@ export default function MatchSetup() {
       }
 
       const s = data.squads || { playersA: [], playersB: [] };
-
       setTeamAPlayers(s.playersA || []);
       setTeamBPlayers(s.playersB || []);
-
       await checkPlayersInDB(s.playersA || [], s.playersB || []);
     } catch (err) {
       console.error(err);
