@@ -1,7 +1,5 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
@@ -9,18 +7,6 @@ import styles from "./page.module.css";
 export default function MatchSetup() {
   const [teamA, setTeamA] = useState("");
   const [teamB, setTeamB] = useState("");
-  const [searchReady, setSearchReady] = useState(false);
-  const searchParams = useSearchParams(); // keep at top level
-
-  // Client-side only
-  useEffect(() => {
-    setTeamA(searchParams.get("team1") || "");
-    setTeamB(searchParams.get("team2") || "");
-    setSearchReady(true); // mark that params are ready
-  }, [searchParams]);
-
-  // Prevent rendering until client-side params are ready
-  if (!searchReady) return null;
 
   const [url, setUrl] = useState("");
   const [teamAPlayers, setTeamAPlayers] = useState([]);
@@ -131,3 +117,4 @@ export default function MatchSetup() {
     </div>
   );
 }
+
