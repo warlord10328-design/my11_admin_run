@@ -1,0 +1,182 @@
+.blind{
+    display:none;
+}
+.flex{
+    display:flex;
+    justify-content: space-between;
+}
+.title{
+   background: linear-gradient(90deg, #a200ff, #00ffff);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   font-size: 7vw;
+   text-align: center;
+   font-weight: bold;
+   margin-top: 5vw;
+}
+.opt{
+    color:#22002b;
+    font-weight: bold;
+}
+.but,.butc,.buti{
+    height:10vw;
+    width:30vw;
+    color:#000;
+    font-weight: 700;
+    text-align: center;
+    font-size: 5vw;
+    border-radius: 3vw;
+    box-shadow: 0vw 1vw 2vw #000000;
+    margin:5vw auto;
+}
+.buti{
+    background:linear-gradient(130deg, #00ff95,#00ffd5);
+}
+.but{
+    background:linear-gradient(130deg, #00ff95,#91ff00);
+}
+.butc{
+    background:linear-gradient(130deg, #ff006a,#9900ff);
+}
+.but:active,.buti:active{
+    box-shadow: 0vw 0.5vw 1vw #000000;
+    transform: translateY(1vw);
+}
+.card{
+    height: 100vh;
+    width: 100vw;
+    backdrop-filter: blur(10px);
+    position: absolute;
+    top:0;
+    padding-top: 20vw;
+}
+.toor{
+    color:#ffff00;
+    margin:2vw;
+    font-size: 4vw;
+    width: 40vw;
+}
+.input{
+    border:none;
+    margin: 2vw;
+    background-color: #fff;
+    font-size: 4vw;
+    outline: none;
+    color:#000;
+}
+.opta{
+    width:30vw;
+    text-align: center;
+    color:#dadadaa9;
+    height: 10vw;
+    font-size: 5vw;
+}
+.opta2{
+    width:30vw;
+    font-size: 5vw;
+    text-align: center;
+    color:#a200ff;
+    height: 10vw;
+    background:linear-gradient(180deg,#00000000,#a200ff77);
+}
+.toastr{
+    color:#f00;
+    text-align: center;
+}
+.first_container{
+  height:30vw;
+  width:95vw;
+  background-color: transparent;
+  border-radius:3vw;
+  margin:1vw 2.5vw;
+  border: 1px solid #ffffff33;
+  box-shadow: 0 0 3vw #000;
+  background-image: linear-gradient(#0e191e,#0e191e, #3f0022a0);
+}
+.slip_bond{
+  display:flex;
+}
+.first_team{
+  height:20vw;
+  width:30vw;
+}
+.flag{
+  width: 10vw;
+  height:10vw;
+  border-radius: 50%;
+  background-color: #fff;
+  background-size:cover;
+  background-position: center;
+  margin:3vw 0vw 0vw 5vw;
+}
+.name{
+  font-weight: 200;
+  font-size: 4vw;
+  color: #fff;
+  margin-left:6.5vw;
+  font-family: "Roboto", sans-serif;
+}
+.tournament{
+  width:35vw;
+  height:18vw;
+  text-align: center;
+  padding-top:3vw;
+}
+.league{
+  font-size: 3vw;
+  color: #ffffff77;
+  padding:1vw 0vw 0vw 1vw;
+}
+.play{
+  width: 10vw;
+  margin: 1vw auto;
+}
+.vanue{
+  font-size: 3vw;
+  color: #ffffff77;
+  margin-top:5vw;
+}
+.time{
+  font-size: 3vw;
+  color: #ffffff77;
+  margin-top:1vw;
+}
+.second_team{
+  height:20vw;
+  width:30vw;
+}
+.flag2{
+  width: 10vw;
+  height:10vw;
+  border-radius: 50%;
+  background-color: #fff;
+  background-size:cover;
+  background-position: center;
+  margin:3vw 0vw 0vw 15vw;
+}
+.name2{
+  font-weight: 200;
+  font-size: 4vw;
+  color: #fff;
+  margin-left:16vw;
+  font-family: "Roboto", sans-serif;
+}
+.slip{
+  width: 100%;
+  height:5vw;
+  border-radius:2vw;
+  display:flex;
+}
+.price_logo{
+  height:5vw;
+  width:5vw;
+  background-color:#000;
+  margin:0vw 2vw 0vw 2vw;
+}
+.special{
+  color:white;
+  margin:0vw 2vw 0vw 2vw;
+  display: flex;
+  font-size:3.5vw;
+  font-family: "Roboto", sans-serif;
+}
