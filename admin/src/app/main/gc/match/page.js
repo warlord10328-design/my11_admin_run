@@ -18,11 +18,6 @@ export default function MatchSetup() {
   const [missingB, setMissingB] = useState([]);
   const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL_ONLINE;
 
-  useEffect(() => {
-    setTeamA(initialTeamA);
-    setTeamB(initialTeamB);
-  }, [initialTeamA, initialTeamB]);
-
   async function handleGetData() {
     try {
       const res = await fetch(`${BACKEND_URL}/scrape/scrape-squad`, {
@@ -131,3 +126,4 @@ export default function MatchSetup() {
     </div>
   );
 }
+
