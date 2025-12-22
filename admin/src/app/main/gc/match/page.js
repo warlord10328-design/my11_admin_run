@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import styles from "../page.module.css";
+import styles from "./page.module.css";
 
 export default function MatchSetup() {
   const searchParams = useSearchParams();
@@ -126,4 +126,5 @@ export default function MatchSetup() {
     </div>
   );
 }
+
 
