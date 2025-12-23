@@ -16,7 +16,7 @@ export default function Login() {
     setError("");
 
     try {
-      const res = await fetch(`{BACKEND_URL}/admin/login`, {
+      const res = await fetch(`${BACKEND_URL}/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // important for cookies
@@ -65,4 +65,5 @@ export default function Login() {
     </div>
   );
 }
+
 
