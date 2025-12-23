@@ -9,34 +9,41 @@ export default function Main() {
   const [admin, setAdmin] = useState(null);
   const [loading, setLoading] = useState(true);
   const [adomClass, setAdomClass] = useState("adom2");
+
   const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL_ONLINE;
 
   const setAdomfunt = () => {
-  setAdomClass("adom");
-
-  setTimeout(() => {
-    setAdomClass("adom2");
-  }, 1000);
-};
-
+    setAdomClass("adom");
+    setTimeout(() => setAdomClass("adom2"), 1000);
+  };
 
   useEffect(() => {
     async function check() {
+      const token = localStorage.getItem("adminToken");
+
+      if (!token) {
+        router.push("/login");
+        return;
+      }
+
       try {
         const res = await fetch(`${BACKEND_URL}/admin/me`, {
-          method: "GET",
-          credentials: "include",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         if (!res.ok) {
-          return router.push("/login");
+          localStorage.removeItem("adminToken");
+          router.push("/login");
+          return;
         }
 
         const data = await res.json();
         setAdmin(data);
         setLoading(false);
       } catch (err) {
-        console.log(err);
+        console.error(err);
         router.push("/login");
       }
     }
@@ -50,77 +57,30 @@ export default function Main() {
     <div>
       <h2 className={styles.title}>Welcome {admin.username}</h2>
 
-      <div className={styles.boot} onClick={() => {
-        if (admin.role !== "admin")
-            {setAdomfunt();
-            return;}
-            router.push("/main/d");
-        }}>
-        Dashboard
-      </div>
-
-      <div className={styles.boot} onClick={() => {
-        if (admin.role !== "admin")
-            {setAdomfunt();
-            return;}
-            router.push("/main/um");
-      }}>
-        User Management
-      </div>
-
-      <div className={styles.boot} onClick={() => {
-            if (admin.role !== "admin")
-            {setAdomfunt();
-            return;}
-            router.push("/main/gc");
-        }}>
-        Game Control
-      </div>
-
-      <div className={styles.boot} onClick={() => {
-        if (admin.role !== "admin")
-            {setAdomfunt();
-            return;}
-            router.push("/main/pm");
-      }}>
-        Payment Management
-      </div>
-
-      <div className={styles.boot} onClick={() => {
-        if (admin.role !== "admin")
-            {setAdomfunt();
-            return;}
-            router.push("/main/kyc");
-        }}>
-        KYC & User Verification
-      </div>
-
-      <div className={styles.boot} onClick={() => {
-        if (admin.role !== "admin")
-            {setAdomfunt();
-            return;}
-            router.push("/main/notify");
-        }}>
-        Notification & Marketing
-      </div>
-
-      <div className={styles.boot} onClick={() => {
-        if (admin.role !== "admin")
-            {setAdomfunt();
-            return;}
-            router.push("/main/sc");
-        }}>
-        Settings
-      </div>
-
-      <div className={styles.boot} onClick={() => {
-        if (admin.role !== "admin")
-            {setAdomfunt();
-            return;}
-            router.push("/main/fa");
-        }}>
-        Fraud Alerts
-      </div>
+      {[
+        ["Dashboard", "/main/d"],
+        ["User Management", "/main/um"],
+        ["Game Control", "/main/gc"],
+        ["Payment Management", "/main/pm"],
+        ["KYC & User Verification", "/main/kyc"],
+        ["Notification & Marketing", "/main/notify"],
+        ["Settings", "/main/sc"],
+        ["Fraud Alerts", "/main/fa"],
+      ].map(([label, path]) => (
+        <div
+          key={path}
+          className={styles.boot}
+          onClick={() => {
+            if (admin.role !== "admin") {
+              setAdomfunt();
+              return;
+            }
+            router.push(path);
+          }}
+        >
+          {label}
+        </div>
+      ))}
 
       <div className={styles[adomClass]}>Admin access only</div>
     </div>
