@@ -9,6 +9,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
   const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL_ONLINE;
 
   const handleLogin = async (e) => {
@@ -18,8 +19,9 @@ export default function Login() {
     try {
       const res = await fetch(`${BACKEND_URL}/admin/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include", // important for cookies
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ username, password }),
       });
 
@@ -29,6 +31,9 @@ export default function Login() {
         setError(data.error || "Login failed");
         return;
       }
+
+      // ✅ SAVE TOKEN
+      localStorage.setItem("adminToken", data.token);
 
       router.push("/main");
     } catch (err) {
@@ -60,10 +65,10 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button type="submit" className={styles.button}>Login</button>
+        <button type="submit" className={styles.button}>
+          Login
+        </button>
       </form>
     </div>
   );
 }
-
-
