@@ -9,6 +9,7 @@ export default function Insert() {
   // ---------- Loaded Data ----------
   const [contestsList, setContestsList] = useState([]); // contests for prize dropdown
   const [teamsList, setTeamsList] = useState([]);
+  const [playerExists, setPlayerExists] = useState(null);
 
   // ---------- Form States ----------
   const [tournament, setTournament] = useState({ name: "" });
@@ -51,6 +52,30 @@ export default function Insert() {
     }
     loadData();
   }, []);
+
+  async function checkPlayerExists() {
+  try {
+    if (!player.name.trim()) {
+      return alert("Enter player name first");
+    }
+
+    const res = await fetch(
+      `${BACKEND_URL}/insert/player/check?name=${encodeURIComponent(player.name)}`
+    );
+
+    const data = await res.json();
+
+    if (data.exists) {
+      setPlayerExists(true);
+      alert("Player already exists");
+    } else {
+      setPlayerExists(false);
+      alert("Player not found");
+    }
+  } catch (err) {
+    alert("Error: " + err.message);
+  }
+}
 
   // ---------- Generic Form Sender ----------
   async function sendFormData(url, dataObj, resetFunc) {
@@ -236,22 +261,53 @@ export default function Insert() {
     onChange={(e) => setPlayer({ ...player, dob: e.target.value })}
   />
 
-  <button
-    onClick={() =>
-      sendFormData(`${BACKEND_URL}/insert/player`, player, () =>
-        setPlayer({
-          name: "",
-          image_front: null,
-          image_side: null,
-          team_id: "",
-          role: "",
-          dob: "",
-        })
-      )
-    }
-  >
-    Insert Player
+ <button onClick={checkPlayerExists}>
+    Check Player
   </button>
+
+  <button
+  onClick={async () => {
+    try {
+      // ---------- Check Existing Player ----------
+      const checkRes = await fetch(
+        `${BACKEND_URL}/insert/player/check?name=${encodeURIComponent(player.name)}`
+      );
+
+      const checkData = await checkRes.json();
+
+      let shouldContinue = true;
+
+      // if player already exists
+      if (checkData.exists) {
+        shouldContinue = window.confirm(
+          "Same name player already exists. Do you want to add again?"
+        );
+      }
+
+      // stop if user clicks Cancel
+      if (!shouldContinue) return;
+
+      // ---------- Upload Player ----------
+      await sendFormData(
+        `${BACKEND_URL}/insert/player`,
+        player,
+        () =>
+          setPlayer({
+            name: "",
+            image_front: null,
+            image_side: null,
+            team_id: "",
+            role: "",
+            dob: "",
+          })
+      );
+    } catch (err) {
+      alert("Error: " + err.message);
+    }
+  }}
+>
+  Insert Player
+</button>
 </section>
 
 
