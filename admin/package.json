@@ -15,7 +15,6 @@
   "dependencies": {
   "@imgly/background-removal": "^1.5.8",
   "browser-image-compression": "^2.0.2",
-  "onnxruntime-web": "^1.22.0",
   "next": "16.1.0",
   "react": "^19.1.0",
   "react-dom": "^19.1.0",
