@@ -13,8 +13,6 @@
     "eslint-config-next": "16.0.3"
   },
   "dependencies": {
-  "@imgly/background-removal": "^1.5.8",
-  "browser-image-compression": "^2.0.2",
   "next": "16.1.0",
   "react": "^19.1.0",
   "react-dom": "^19.1.0",
