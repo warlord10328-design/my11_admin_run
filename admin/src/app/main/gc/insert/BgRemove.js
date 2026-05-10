@@ -1,5 +1,4 @@
 import imageCompression from "browser-image-compression";
-import { removeBackground } from "@imgly/background-removal";
 
 export async function processImage(
   file,
@@ -16,12 +15,59 @@ export async function processImage(
       useWebWorker: true,
     });
 
-    // 2. Remove background
+    // 2. Remove background using remove.bg API
     let imageBlob = compressed;
 
     if (removeBg) {
-      imageBlob = await removeBackground(compressed);
+
+  const API_KEYS = [
+    process.env.NEXT_PUBLIC_REMOVE_BG_KEY_1,
+    process.env.NEXT_PUBLIC_REMOVE_BG_KEY_2,
+    process.env.NEXT_PUBLIC_REMOVE_BG_KEY_3,
+  ];
+
+  let success = false;
+
+  for (const key of API_KEYS) {
+
+    try {
+
+      const formData = new FormData();
+
+      formData.append("image_file", compressed);
+      formData.append("size", "auto");
+
+      const response = await fetch(
+        "https://api.remove.bg/v1.0/removebg",
+        {
+          method: "POST",
+          headers: {
+            "X-Api-Key": key,
+          },
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+
+        imageBlob = await response.blob();
+
+        success = true;
+
+        break;
+      }
+
+    } catch (err) {
+      console.log("API key failed");
     }
+  }
+
+  if (!success) {
+    throw new Error(
+      "All remove.bg API keys exhausted"
+    );
+  }
+}
 
     // 3. Load image into canvas
     const img = new Image();
@@ -46,10 +92,10 @@ export async function processImage(
     // Transparent background
     ctx.clearRect(0, 0, width, height);
 
-    // Full stretch
+    // Full stretch resize
     ctx.drawImage(img, 0, 0, width, height);
 
-    // 5. Convert to PNG
+    // 5. Convert canvas to PNG blob
     const finalBlob = await new Promise((resolve) => {
       canvas.toBlob(
         (blob) => resolve(blob),
@@ -61,7 +107,7 @@ export async function processImage(
     // cleanup memory
     URL.revokeObjectURL(objectUrl);
 
-    // 6. Return file
+    // 6. Return final file
     return new File(
       [finalBlob],
       `${Date.now()}.png`,
@@ -71,7 +117,12 @@ export async function processImage(
     );
 
   } catch (err) {
-    console.error("Image processing failed:", err);
+
+    console.error(
+      "Image processing failed:",
+      err
+    );
+
     throw err;
   }
 }
